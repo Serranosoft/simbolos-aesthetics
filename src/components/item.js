@@ -1,13 +1,11 @@
 import { Pressable, StyleSheet, Text, ToastAndroid, View } from "react-native";
 import FavoriteBubble from "./favorite-bubble";
-import { memo, useContext, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import * as Clipboard from 'expo-clipboard';
-import { DataContext } from "../DataContext";
 
 function Item({ text, id, handleActive, activeId, setText }) {
 
     const [trigger, setTrigger] = useState(false);
-    const { setAdTrigger } = useContext(DataContext);
 
     useEffect(() => {
         if (activeId !== null) {
@@ -23,8 +21,6 @@ function Item({ text, id, handleActive, activeId, setText }) {
         if (setText) {
             setText(text);
         }
-
-        setAdTrigger((adTrigger) => adTrigger + 1);
     }
 
     return (

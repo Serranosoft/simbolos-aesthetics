@@ -1,14 +1,13 @@
 
-import { Link, SplashScreen, Stack, Tabs } from 'expo-router';
-import { StatusBar, StyleSheet, Text } from 'react-native';
+import { SplashScreen, Stack } from 'expo-router';
+import { StatusBar, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { useFonts } from 'expo-font';
-import { createRef, useEffect, useState } from 'react';
-import { ui } from '../src/utils/styles';
+import { useEffect, useState } from 'react';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DataContext } from '../src/utils/DataContext';
 import { runOnJS } from 'react-native-reanimated';
-import AdsHandler from '../src/components/AdsHandler';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
@@ -30,17 +29,6 @@ export default function Layout() {
     const [openFavorites, setOpenFavorites] = useState(false);
     const tap = Gesture.Tap().onBegin((event) => { if (openFavorites) runOnJS(setOpenFavorites)(false) })
 
-    // Gestión de anuncios
-    const [adTrigger, setAdTrigger] = useState(0);
-    const adsHandlerRef = createRef();
-
-    useEffect(() => {
-        if (adTrigger > 4) {
-            adsHandlerRef.current.showIntersitialAd();
-            setAdTrigger(0);
-        }
-    }, [adTrigger])
-
     if (!fontsLoaded) {
         return null;
     }
@@ -48,9 +36,8 @@ export default function Layout() {
     return (
         <GestureHandlerRootView style={{ flex: 1 }}>
             <StatusBar style="light" />
-            <AdsHandler ref={adsHandlerRef} adType={[0]} />
             <GestureDetector gesture={tap}>
-                <DataContext.Provider value={{ openFavorites: openFavorites, setOpenFavorites, setAdTrigger: setAdTrigger }}>
+                <DataContext.Provider value={{ openFavorites: openFavorites, setOpenFavorites }}>
                     <View style={styles.container}>
                         <Stack screenOptions={{ headerShown: true }} />
                     </View>
