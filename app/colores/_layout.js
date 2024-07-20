@@ -5,6 +5,8 @@ import TabViewComponent from '../../src/components/tab-view';
 import ColoresRosa from './rosa';
 import ColoresMorado from './morado';
 import ColoresRojo from './rojo';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import { bannerId } from '../../src/utils/constants';
 
 export default function Colores() {
 
@@ -26,6 +28,7 @@ export default function Colores() {
         <>
             <Stack.Screen options={{ header: () => <Header title={"Coquette por colores"} /> }} />
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }

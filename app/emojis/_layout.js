@@ -6,6 +6,8 @@ import EmojisAmarillos from './amarillo';
 import EmojisAzules from './azul';
 import EmojisNaranjas from './naranja';
 import EmojisVerdes from './verde';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import { bannerId } from '../../src/utils/constants';
 
 export default function Aesthetic() {
 
@@ -36,6 +38,7 @@ export default function Aesthetic() {
         <>
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
             <Stack.Screen options={{ header: () => <Header title={"Aesthetic"} /> }} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }

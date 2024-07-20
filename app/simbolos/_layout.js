@@ -6,6 +6,8 @@ import SimbolosCorazones from './corazon';
 import SimbolosFlores from './flor';
 import SimbolosCirculosYPuntos from './circulos-y-puntos';
 import SimbolosTop from './top';
+import { bannerId } from '../../src/utils/constants';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 
 export default function Aesthetic() {
     
@@ -34,6 +36,7 @@ export default function Aesthetic() {
         <>
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
             <Stack.Screen options={{ header: () => <Header title={"Símbolos"} /> }} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }

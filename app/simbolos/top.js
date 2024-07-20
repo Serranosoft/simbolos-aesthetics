@@ -3,8 +3,6 @@ import { SIMBOLOS } from "../../src/utils/data";
 import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
 import Item from "../../src/components/item";
-import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { bannerId } from "../../src/utils/constants";
 
 export default function SimbolosTop() {
 
@@ -16,7 +14,6 @@ export default function SimbolosTop() {
 
     return (
         <View style={{ flex: 1 }}>
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
             <View style={{ flex: 1, marginTop: 24 }}>
                 <Image source={require("../../assets/flowers.jpg")} style={styles.img} />
                 <FlashList

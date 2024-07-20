@@ -3,8 +3,6 @@ import { TOP } from "../../src/utils/data";
 import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
 import Item from "../../src/components/item";
-import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-import { bannerId } from "../../src/utils/constants";
 
 export default function TopCoquette() {
 
@@ -17,7 +15,6 @@ export default function TopCoquette() {
     return (
         <View style={{ flex: 1 }}>
             <View style={{ flex: 1, marginTop: 24 }}>
-                <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
                 <Image source={require("../../assets/teddy.jpg")} style={styles.img} />
                 <FlashList
                     data={TOP.coquette}

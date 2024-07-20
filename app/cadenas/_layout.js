@@ -6,6 +6,8 @@ import CadenasSimbolos from './simbolos';
 import CadenasEmojis from './emojis';
 import CadenasSeparadores from './separadores';
 import CadenasUniones from './uniones';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import { bannerId } from '../../src/utils/constants';
 
 export default function Aesthetic() {
 
@@ -34,6 +36,7 @@ export default function Aesthetic() {
         <>
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
             <Stack.Screen options={{ header: () => <Header title={"Cadenas decorativas"} /> }} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }

@@ -5,6 +5,8 @@ import TabViewComponent from '../../src/components/tab-view';
 import AestheticAnimales from './animal';
 import AestheticMejor from './mejor';
 import AestheticMano from './mano';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import { bannerId } from '../../src/utils/constants';
 
 export default function Aesthetic() {
 
@@ -26,6 +28,7 @@ export default function Aesthetic() {
         <>
             <Stack.Screen options={{ header: () => <Header title={"Aesthetic"} /> }} />
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }

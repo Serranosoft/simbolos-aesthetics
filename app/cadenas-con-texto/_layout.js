@@ -4,6 +4,8 @@ import Header from '../../src/components/header';
 import TabViewComponent from '../../src/components/tab-view';
 import CadenasConTextoSaludos from './saludos';
 import CadenasConTextoDespedidas from './despedidas';
+import { bannerId } from '../../src/utils/constants';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 
 export default function CadenasConTexto() {
 
@@ -26,6 +28,7 @@ export default function CadenasConTexto() {
         <>
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
             <Stack.Screen options={{ header: () => <Header title={"Cadenas con texto"} /> }} />
+            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
         </>
     );
 }
