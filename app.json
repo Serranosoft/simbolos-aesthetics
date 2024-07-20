@@ -4,7 +4,7 @@
         "slug": "simbolos-aesthetic",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/logo-emoji-coquette.png",
+        "icon": "./assets/simbolos-coquette-logo.png",
         "userInterfaceStyle": "light",
         "splash": {
             "image": "./assets/splash-emoji.png",
@@ -20,7 +20,7 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/logo-emoji-coquette.png",
+                "foregroundImage": "./assets/simbolos-coquette-logo.png",
                 "backgroundColor": "#ffffff"
             },
             "versionCode": 5,
@@ -33,10 +33,17 @@
             "eas": {
                 "projectId": "ed4a545f-6d06-460e-b4f9-cb5be89a93be"
             }
-        }
-    },
-    "react-native-google-mobile-ads": {
-        "android_app_id": "ca-app-pub-3738413299329691~6116440845",
-        "ios_app_id": "ca-app-pub-3738413299329691~6116440845"
+        },
+        "plugins": [
+            "expo-font",
+            "expo-router",
+            [
+                "react-native-google-mobile-ads",
+                {
+                    "androidAppId": "ca-app-pub-3738413299329691~6116440845",
+                    "iosAppId": "ca-app-pub-3738413299329691~6116440845"
+                }
+            ]
+        ]
     }
 }
