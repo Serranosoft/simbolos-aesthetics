@@ -9,6 +9,7 @@ import Animated, {
     interpolateColor,
 } from 'react-native-reanimated';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { colors } from '../utils/styles';
 
 export default function FavoriteBubble({ triggered, text }) {
 
@@ -30,7 +31,7 @@ export default function FavoriteBubble({ triggered, text }) {
             top: -20,
             left: -20,
             borderRadius: 100,
-            backgroundColor: "#F9BAC6",
+            backgroundColor: colors.light,
             width: 40,
             height: 40,
             padding: 5
@@ -48,7 +49,7 @@ export default function FavoriteBubble({ triggered, text }) {
             height: "100%",
             left: 0,
             top: 0,
-            borderColor: "#F9BAC6"
+            borderColor: colors.light
         };
     });
 

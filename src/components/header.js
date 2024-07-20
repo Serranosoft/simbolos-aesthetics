@@ -1,53 +1,48 @@
-import { Link, useRouter } from "expo-router";
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View, PanResponder } from "react-native";
-import { ui } from "../utils/styles";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useContext, useEffect, useRef } from "react";
-import { DataContext } from "../utils/DataContext";
+import { useRouter } from "expo-router";
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Pressable } from "react-native";
+import { useState } from "react";
+import { Menu, MenuItem } from "react-native-material-menu";
+import { MaterialIcons } from '@expo/vector-icons';
+import { components, ui } from "../utils/styles";
 
-export default function Header({ title }) {
+export default function Header({ title, showMenu = true }) {
 
     const router = useRouter();
-    const { openFavorites, setOpenFavorites } = useContext(DataContext);
-
+    const [open, setOpen] = useState(false);
 
     return (
-        <View style={styles.header}>
+        <View style={components.header}>
             <View style={styles.title}>
                 <Pressable onPress={() => router.back()}>
-                    <Image style={styles.img} source={require("../../assets/back.png")} />
+                    <MaterialIcons name="arrow-back" size={24} color="black" />
                 </Pressable>
                 {title && <Text style={[ui.h4, { color: "#000" }]}>{title}</Text>}
             </View>
-            {/* { */}
-                <View>
-                    <Ionicons name="ellipsis-vertical" size={28} color="#000" onPress={() => setOpenFavorites(!openFavorites)} />
-                    <View style={[styles.info, { display: openFavorites ? "flex" : "none" }]}>
-                        <Link href="/favorites" asChild>
-                            <TouchableOpacity>
-                                <Text style={[ui.text, { textAlign: "center", fontFamily: "Bold" }]}>Mis Favoritos 🏹</Text>
-                            </TouchableOpacity>
-                        </Link>
-                    </View>
-                </View>
-
-            {/* } */}
+            {
+                showMenu &&
+                <Menu
+                    visible={open}
+                    onRequestClose={() => setOpen(false)}
+                    anchor={(
+                        <TouchableWithoutFeedback onPress={() => setOpen(true)}>
+                            <MaterialIcons name="more-vert" size={24} color="black" />
+                        </TouchableWithoutFeedback>
+                    )}>
+                    <MenuItem onPress={() => router.push("/favorites")}>
+                        <View style={components.row}>
+                            <MaterialIcons name="favorite-outline" size={24} color="black" />
+                            <Text>Mis Favoritos </Text>
+                        </View>
+                    </MenuItem>
+                </Menu>
+            }
         </View>
+
     )
 }
 
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: "#F9BAC6",
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 8,
-        height: 50,
-        paddingHorizontal: 12
-    },
 
+const styles = StyleSheet.create({
     title: {
         flexDirection: "row",
         alignItems: "center",
@@ -64,10 +59,5 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#e1e1e1",
         borderRadius: 8
-    },
-
-    img: {
-        width: 30,
-        height: 30,
     }
 })

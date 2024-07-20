@@ -3,6 +3,7 @@ import { SIMBOLOS } from "../../src/utils/data";
 import { FlashList } from "@shopify/flash-list";
 import { useState } from "react";
 import Item from "../../src/components/item";
+import { layout, margin } from "../../src/utils/styles";
 
 export default function SimbolosTop() {
 
@@ -13,8 +14,8 @@ export default function SimbolosTop() {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{ flex: 1, marginTop: 24 }}>
+        <View style={layout.flex}>
+            <View style={[layout.flex, margin.bigTop]}>
                 <Image source={require("../../assets/flowers.jpg")} style={styles.img} />
                 <FlashList
                     data={SIMBOLOS.top}

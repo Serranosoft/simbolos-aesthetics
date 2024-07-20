@@ -3,10 +3,8 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { useFonts } from 'expo-font';
-import { useEffect, useState } from 'react';
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import { DataContext } from '../src/utils/DataContext';
-import { runOnJS } from 'react-native-reanimated';
+import { useEffect } from 'react';
+import { colors } from '../src/utils/styles';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,24 +24,17 @@ export default function Layout() {
         }
     }, [fontsLoaded]);
 
-    const [openFavorites, setOpenFavorites] = useState(false);
-    const tap = Gesture.Tap().onBegin((event) => { if (openFavorites) runOnJS(setOpenFavorites)(false) })
-
     if (!fontsLoaded) {
         return null;
     }
 
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <>
             <StatusBar style="light" />
-            <GestureDetector gesture={tap}>
-                <DataContext.Provider value={{ openFavorites: openFavorites, setOpenFavorites }}>
-                    <View style={styles.container}>
-                        <Stack screenOptions={{ headerShown: true }} />
-                    </View>
-                </DataContext.Provider>
-            </GestureDetector>
-        </GestureHandlerRootView>
+            <View style={styles.container}>
+                <Stack screenOptions={{ headerShown: true }} />
+            </View>
+        </>
 
     )
 }
@@ -54,7 +45,7 @@ const styles = StyleSheet.create({
         position: "relative",
         justifyContent: "center",
         paddingTop: StatusBar.currentHeight,
-        backgroundColor: "#F9BAC6"
+        backgroundColor: colors.light
     },
 
 })

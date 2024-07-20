@@ -25,7 +25,9 @@ export default function Favorites() {
 
     async function get() {
         let test = await AsyncStorage.getItem("favorites") || [];
-        test = JSON.parse(test);
+        if (test.length > 0) {
+            test = JSON.parse(test);
+        }
         setFavorites(test);
     }
 
@@ -39,7 +41,7 @@ export default function Favorites() {
 
     return (
         <>
-            <Stack.Screen options={{ header: () => <Header title={"Mis favoritos"} /> }} />
+            <Stack.Screen options={{ header: () => <Header title={"Mis favoritos"} showMenu={false} /> }} />
             <View style={styles.container}>
                 <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
                 <View style={{ flex: 1, width: "100%" }}>
