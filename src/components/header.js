@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback, Pressable } from "rea
 import { useState } from "react";
 import { Menu, MenuItem } from "react-native-material-menu";
 import { MaterialIcons } from '@expo/vector-icons';
-import { components, ui } from "../utils/styles";
+import { components, padding, ui } from "../utils/styles";
 
 export default function Header({ title, showMenu = true }) {
 
@@ -28,8 +28,11 @@ export default function Header({ title, showMenu = true }) {
                             <MaterialIcons name="more-vert" size={24} color="black" />
                         </TouchableWithoutFeedback>
                     )}>
-                    <MenuItem onPress={() => router.push("/favorites")}>
-                        <View style={components.row}>
+                    <MenuItem onPress={() => {
+                        router.push("/favorites");
+                        setOpen(false);
+                    }}>
+                        <View style={[components.row, padding.smallHorizontal]}>
                             <MaterialIcons name="favorite-outline" size={24} color="black" />
                             <Text>Mis Favoritos </Text>
                         </View>

@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import { colors } from '../src/utils/styles';
+import Constants from "expo-constants";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        paddingTop: StatusBar.currentHeight,
+        paddingTop: Constants.statusBarHeight,
         backgroundColor: colors.light
     },
 

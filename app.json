@@ -1,49 +1,53 @@
 {
-    "expo": {
-        "name": "Simbolos Coquette",
-        "slug": "simbolos-aesthetic",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/simbolos-coquette-logo.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/splash-emoji.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "scheme": "simbolos-coquette",
-        "assetBundlePatterns": [
-            "**/*"
-        ],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/simbolos-coquette-logo.png",
-                "backgroundColor": "#ffffff"
-            },
-            "versionCode": 6,
-            "package": "com.paulaymanu113.simbolosaesthetic"
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "extra": {
-            "eas": {
-                "projectId": "ed4a545f-6d06-460e-b4f9-cb5be89a93be"
-            }
-        },
-        "plugins": [
-            "expo-font",
-            "expo-router",
-            [
-                "react-native-google-mobile-ads",
-                {
-                    "androidAppId": "ca-app-pub-3738413299329691~6116440845",
-                    "iosAppId": "ca-app-pub-3738413299329691~6116440845"
-                }
-            ]
-        ]
-    }
+  "expo": {
+    "name": "Simbolos Coquette",
+    "slug": "simbolos-aesthetic",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/simbolos-coquette-logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-emoji.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "scheme": "simbolos-coquette",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.paulaymanu113.simbolosaesthetic",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/simbolos-coquette-logo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "versionCode": 6,
+      "package": "com.paulaymanu113.simbolosaesthetic"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed4a545f-6d06-460e-b4f9-cb5be89a93be"
+      }
+    },
+    "plugins": [
+      "expo-font",
+      "expo-router",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3738413299329691~6116440845",
+          "iosAppId": "ca-app-pub-3738413299329691~6116440845"
+        }
+      ]
+    ]
+  }
 }

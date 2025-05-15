@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, ToastAndroid, View } from "react-native";
+import { Alert, Platform, Pressable, StyleSheet, Text, ToastAndroid, View } from "react-native";
 import FavoriteBubble from "./favorite-bubble";
 import { memo, useEffect, useState } from "react";
 import * as Clipboard from 'expo-clipboard';
@@ -16,7 +16,18 @@ function Item({ text, id, handleActive, activeId, setText }) {
     async function addToClipboard() {
         await Clipboard.setStringAsync(text);
 
-        ToastAndroid.showWithGravityAndOffset(`¡${text} Copiado!`, ToastAndroid.SHORT, ToastAndroid.BOTTOM, 25, 50);
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(
+                `¡${text} Copiado!`,
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+            );
+        } else {
+            Alert.alert(`¡${text} Copiado!`);
+        }
+
         handleActive(id);
         if (setText) {
             setText(text);

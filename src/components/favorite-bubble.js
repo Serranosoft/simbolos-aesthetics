@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ToastAndroid } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ToastAndroid, Alert, Platform } from 'react-native';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import Animated, {
     useAnimatedStyle,
@@ -65,14 +65,18 @@ export default function FavoriteBubble({ triggered, text }) {
             favorites.push(text);
             await AsyncStorage.setItem("favorites", JSON.stringify(favorites));
         }
-
-        ToastAndroid.showWithGravityAndOffset(
-            `${text} guardada en favoritos`,
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM,
-            25,
-            50,
-        );
+        
+        if (Platform.OS === "android") {
+            ToastAndroid.showWithGravityAndOffset(
+                `${text} guardada en favoritos`,
+                ToastAndroid.LONG,
+                ToastAndroid.BOTTOM,
+                25,
+                50
+            );
+        } else {
+            Alert.alert(`${text} guardada en favoritos`);
+        }
 
     }
 
