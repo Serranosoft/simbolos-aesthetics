@@ -27,7 +27,7 @@
         "foregroundImage": "./assets/simbolos-coquette-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 6,
+      "versionCode": 7,
       "package": "com.paulaymanu113.simbolosaesthetic"
     },
     "web": {
