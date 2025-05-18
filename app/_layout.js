@@ -3,9 +3,11 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar, StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { useFonts } from 'expo-font';
-import { useEffect } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import { colors } from '../src/utils/styles';
 import Constants from "expo-constants";
+import AdsHandler from '../src/components/AdsHandler';
+import { Context } from '../src/Context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,6 +20,19 @@ export default function Layout() {
         "Semibold": require("../assets/fonts/Mali-Semibold.ttf"),
         "Bold": require("../assets/fonts/Mali-Bold.ttf"),
     });
+
+    // Anuncios
+    const adsHandlerRef = createRef();
+    const [adTrigger, setAdTrigger] = useState(0);
+    const [showOpenAd, setShowOpenAd] = useState(true);
+
+    // Trigger para mostrar anuncio intersitial
+    useEffect(() => {
+        if (adTrigger > 3) {
+            adsHandlerRef.current.showIntersitialAd();
+            setAdTrigger(0);
+        }
+    }, [adTrigger])
 
     useEffect(() => {
         if (fontsLoaded) {
@@ -32,9 +47,12 @@ export default function Layout() {
     return (
         <>
             <StatusBar style="light" />
-            <View style={styles.container}>
-                <Stack screenOptions={{ headerShown: true }} />
-            </View>
+            <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
+            <Context.Provider value={{ setAdTrigger }}>
+                <View style={styles.container}>
+                    <Stack screenOptions={{ headerShown: true }} />
+                </View>
+            </Context.Provider>
         </>
 
     )
@@ -45,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        paddingTop: Constants.statusBarHeight,
+        // paddingTop: Constants.statusBarHeight,
         backgroundColor: colors.light
     },
 

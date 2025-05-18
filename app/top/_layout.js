@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import Header from '../../src/components/header';
 import TabViewComponent from '../../src/components/tab-view';
@@ -6,6 +6,7 @@ import TopCoquette from './coquette';
 import TopAmor from './amor';
 import { bannerId } from '../../src/utils/constants';
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import { Context } from '../../src/Context';
 
 export default function Top() {
 
@@ -14,6 +15,12 @@ export default function Top() {
         { key: 'first', title: 'Coquette' },
         { key: 'second', title: 'Amor' },
     ]);
+
+    const { setAdTrigger } = useContext(Context);
+
+    useEffect(() => {
+        setAdTrigger((adTrigger) => adTrigger + 1);
+    }, [index])
 
     const renderScene = ({ route }) => {
         switch (route.key) {
