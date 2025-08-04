@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Item from "../src/components/item";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FlashList } from "@shopify/flash-list";
 import Header from "../src/components/header";
@@ -8,12 +8,14 @@ import { Stack } from "expo-router";
 import { ui } from "../src/utils/styles";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId } from "../src/utils/constants";
+import { Context } from "../src/Context";
 
 export default function Favorites() {
 
     const [activeId, setActiveId] = useState(null);
     const [favorites, setFavorites] = useState([]);
     const [text, setText] = useState(null);
+    const { adsLoaded } = useContext(Context);
 
     function handleActive(id) {
         setActiveId(id);
@@ -43,7 +45,7 @@ export default function Favorites() {
         <>
             <Stack.Screen options={{ header: () => <Header title={"Mis favoritos"} showMenu={false} /> }} />
             <View style={styles.container}>
-                <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+                { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
                 <View style={{ flex: 1, width: "100%" }}>
                     <FlashList
                         data={favorites}

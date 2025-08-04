@@ -23,6 +23,7 @@ export default function Layout() {
 
     // Anuncios
     const adsHandlerRef = createRef();
+    const [adsLoaded, setAdsLoaded] = useState(false);
     const [adTrigger, setAdTrigger] = useState(0);
     const [showOpenAd, setShowOpenAd] = useState(true);
 
@@ -47,8 +48,8 @@ export default function Layout() {
     return (
         <>
             <StatusBar style="light" />
-            <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} setShowOpenAd={setShowOpenAd} />
-            <Context.Provider value={{ setAdTrigger }}>
+            <AdsHandler ref={adsHandlerRef} showOpenAd={showOpenAd} adsLoaded={adsLoaded} setAdsLoaded={setAdsLoaded} setShowOpenAd={setShowOpenAd} />
+            <Context.Provider value={{ setAdTrigger, adsLoaded }}>
                 <View style={styles.container}>
                     <Stack screenOptions={{ headerShown: true }} />
                 </View>

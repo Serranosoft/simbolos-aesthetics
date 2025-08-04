@@ -16,7 +16,7 @@ export default function Top() {
         { key: 'second', title: 'Amor' },
     ]);
 
-    const { setAdTrigger } = useContext(Context);
+    const { setAdTrigger, adsLoaded } = useContext(Context);
 
     useEffect(() => {
         setAdTrigger((adTrigger) => adTrigger + 1);
@@ -35,7 +35,7 @@ export default function Top() {
         <>
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
             <Stack.Screen options={{ header: () => <Header title={"TOP"} /> }} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
         </>
     );
 }

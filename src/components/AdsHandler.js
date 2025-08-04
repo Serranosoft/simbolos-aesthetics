@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
-import { AdEventType, AppOpenAd, useInterstitialAd } from "react-native-google-mobile-ads";
+import MobileAds, { AdEventType, AdsConsent, AppOpenAd, useInterstitialAd } from "react-native-google-mobile-ads";
 import { intersitialId, loadId } from "../utils/constants";
 import { AppState } from "react-native";
 
@@ -11,9 +11,32 @@ const AdsHandler = forwardRef((props, ref) => {
         load: loadIntersitial,
         show: showIntersitial } = useInterstitialAd(intersitialId);
 
+    /* CONSENT */
+    const isMobileAdsStartCalledRef = useRef(false);
     useEffect(() => {
-        loadIntersitial();
-    }, [loadIntersitial])
+        const prepare = async () => {
+            const consentInfo = await AdsConsent.requestInfoUpdate();
+            AdsConsent.loadAndShowConsentFormIfRequired()
+                .then(startGoogleMobileAdsSDK)
+                .catch((error) => console.error('Consent gathering failed:', error));
+            startGoogleMobileAdsSDK();
+        }
+
+        prepare();
+    }, []);
+
+    async function startGoogleMobileAdsSDK() {
+        const { canRequestAds } = await AdsConsent.getConsentInfo();
+        if (!canRequestAds || isMobileAdsStartCalledRef.current) {
+            return;
+        }
+
+        isMobileAdsStartCalledRef.current = true;
+        await MobileAds().initialize();
+        props.setAdsLoaded(true);
+        loadIntersitial(); // Cargar intersitial ads
+        loadOpenAppAd(); // Cargar open ads
+    }
 
     useImperativeHandle(ref, () => ({
         loadIntersitialAd() {
@@ -45,7 +68,7 @@ const AdsHandler = forwardRef((props, ref) => {
     const [appStateChanged, setAppStateChanged] = useState(AppState.currentState);
 
     useEffect(() => {
-        appStateChanged == "active" && handleOpenAd();
+        props.adsLoaded && appStateChanged == "active" && handleOpenAd();
     }, [appStateChanged])
 
     function handleOpenAd() {
@@ -57,7 +80,7 @@ const AdsHandler = forwardRef((props, ref) => {
         }
     }
 
-    useEffect(() => {
+    function loadOpenAppAd() {
         const appOpenAd = AppOpenAd.createForAdRequest(loadId);
         appOpenAd.load();
 
@@ -74,7 +97,7 @@ const AdsHandler = forwardRef((props, ref) => {
         AppState.addEventListener("change", nextAppState => {
             setAppStateChanged(nextAppState);
         })
-    }, [])
+    }
 
     return <></>
 })

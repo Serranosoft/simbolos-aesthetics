@@ -14,7 +14,7 @@ export default function Aesthetic() {
     const [index, setIndex] = useState(0);
     const [routes] = useState([ { key: 'first', title: 'Mejores' }, { key: 'second', title: 'Animales' }, { key: 'third', title: 'Manos' } ]);
 
-    const { setAdTrigger } = useContext(Context);
+    const { setAdTrigger, adsLoaded } = useContext(Context);
 
     useEffect(() => {
         setAdTrigger((adTrigger) => adTrigger + 1);
@@ -35,7 +35,7 @@ export default function Aesthetic() {
         <>
             <Stack.Screen options={{ header: () => <Header title={"Aesthetic"} /> }} />
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
         </>
     );
 }

@@ -14,7 +14,7 @@ export default function Colores() {
     const [index, setIndex] = useState(0);
     const [routes] = useState([{ key: 'rosa', title: 'Rosas' }, { key: 'morados', title: 'Morados' }, { key: 'rojos', title: 'Rojos' }]);
 
-    const { setAdTrigger } = useContext(Context);
+    const { setAdTrigger, adsLoaded } = useContext(Context);
 
     useEffect(() => {
         setAdTrigger((adTrigger) => adTrigger + 1);
@@ -35,7 +35,7 @@ export default function Colores() {
         <>
             <Stack.Screen options={{ header: () => <Header title={"Coquette por colores"} /> }} />
             <TabViewComponent renderScene={renderScene} setIndex={setIndex} index={index} routes={routes} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
         </>
     );
 }
