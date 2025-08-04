@@ -12,7 +12,6 @@ export default function Root() {
             <Image source={require("../assets/home.jpg")} style={styles.separator} />
             <View style={{ marginTop: -64 }}>
                 <ScrollView style={{ flex: 1 }}>
-                    
                     <View style={styles.wrapper}>
                         <Link href="/colores/rosa" asChild>
                             <TouchableOpacity style={styles.btn}>
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
         width: "100%",
         resizeMode: "contain",
         marginTop: -80,
-        zIndex: -1
     },
 
     btn: {
