@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/simbolos-coquette-logo.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/splash-emoji.png",
       "resizeMode": "contain",
@@ -27,7 +28,7 @@
         "foregroundImage": "./assets/simbolos-coquette-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "versionCode": 8,
+      "versionCode": 9,
       "package": "com.paulaymanu113.simbolosaesthetic"
     },
     "web": {
